@@ -26,10 +26,10 @@ set(KMIMELIB_VERSION "5.2.40")
 set(AKONADI_VERSION "5.2.40")
 
 ecm_setup_version(${AKONADI_NOTES_VERSION} VARIABLE_PREFIX AKONADINOTES
-                        VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h"
-                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfigVersion.cmake"
-                        SOVERSION 5
-)
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfigVersion.cmake"
+    SOVERSION 5
+    )
 
 ########### Find packages ###########
 find_package(Qt5Xml ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
@@ -46,29 +46,29 @@ add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
 
 add_subdirectory(src)
 if (BUILD_TESTING)
-   add_subdirectory(autotests)
+    add_subdirectory(autotests)
 endif()
 ########### CMake Config Files ###########
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiNotes")
 
 ecm_configure_package_config_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/KF5AkonadiNotesConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfig.cmake"
-  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-)
+    "${CMAKE_CURRENT_SOURCE_DIR}/KF5AkonadiNotesConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfig.cmake"
+    INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+    )
 
 install(FILES
-  "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfig.cmake"
-  "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfigVersion.cmake"
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  COMPONENT Devel
-)
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfigVersion.cmake"
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    COMPONENT Devel
+    )
 
 install(EXPORT KF5AkonadiNotesTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5AkonadiNotesTargets.cmake NAMESPACE KF5::)
 
 install(FILES
-   ${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h
-  DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel
-)
+    ${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel
+    )
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
