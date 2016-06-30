@@ -19,11 +19,13 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
 set(QT_REQUIRED_VERSION "5.6.0")
-set(KDEPIMLIBS_VERSION "5.2.40")
+set(PIM_VERSION "5.2.40")
+set(AKONADI_NOTES_VERSION ${PIM_VERSION})
+
 set(KMIMELIB_VERSION "5.2.40")
 set(AKONADI_VERSION "5.2.40")
 
-ecm_setup_version(${KDEPIMLIBS_VERSION} VARIABLE_PREFIX AKONADINOTES
+ecm_setup_version(${AKONADI_NOTES_VERSION} VARIABLE_PREFIX AKONADINOTES
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfigVersion.cmake"
                         SOVERSION 5
