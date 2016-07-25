@@ -1,0 +1,14 @@
+maintainer: 
+description: Akonadi-Notes library
+tier: 3
+type: functional
+platforms:
+    - name: All
+portingAid: false
+deprecated: false
+release: false
+libraries:
+ - qmake: AkonadiNotes
+   cmake: "KF5::AkonadiNotes"
+cmakename: KF5AkonadiNotes
+
