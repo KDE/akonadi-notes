@@ -1,5 +1,5 @@
-maintainer: 
-description: Akonadi-Notes library
+maintainer:  dvratil
+description: Akonadi Notes library
 tier: 3
 type: functional
 platforms:
@@ -12,3 +12,7 @@ libraries:
    cmake: "KF5::AkonadiNotes"
 cmakename: KF5AkonadiNotes
 
+public_lib: true
+group: kdepim
+platforms:
+    - name: Linux
