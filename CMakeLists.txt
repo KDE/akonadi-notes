@@ -19,7 +19,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
 set(QT_REQUIRED_VERSION "5.6.0")
-set(PIM_VERSION "5.3.90")
+set(PIM_VERSION "5.4.0")
 set(AKONADI_NOTES_VERSION ${PIM_VERSION})
 
 set(KMIMELIB_VERSION "5.3.90")
