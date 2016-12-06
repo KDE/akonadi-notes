@@ -17,6 +17,8 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
+include(ECMCoverageOption)
+
 
 set(QT_REQUIRED_VERSION "5.6.0")
 set(PIM_VERSION "5.4.40")
