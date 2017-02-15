@@ -239,7 +239,7 @@ void NoteMessageWrapper::NoteMessageWrapperPrivate::readMimeMessage(const KMime:
 QDomDocument createXMLDocument()
 {
     QDomDocument document;
-    QString p = QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"");
+    const QString p = QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"");
     document.appendChild(document.createProcessingInstruction(QStringLiteral("xml"), p));
     return document;
 }
@@ -563,5 +563,5 @@ QString noteMimeType()
     return QStringLiteral("text/x-vnd.akonadi.note");
 }
 
-} //End Namepsace
-} //End Namepsace
+} //End Namespace
+} //End Namespace
