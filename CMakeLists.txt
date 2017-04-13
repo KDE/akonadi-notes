@@ -45,6 +45,7 @@ find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadinotes5\")
 add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
+add_definitions( -DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT )
 
 add_subdirectory(src)
 if (BUILD_TESTING)
