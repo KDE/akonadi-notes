@@ -420,7 +420,7 @@ KMime::MessagePtr NoteMessageWrapper::message() const
     header->fromUnicodeString(classification, ENCODING);
     msg->appendHeader(header);
 
-    foreach (const Attachment &a, d->attachments) {
+    for (const Attachment &a : qAsConst(d->attachments)) {
         msg->addContent(d->createAttachmentPart(a));
     }
 
