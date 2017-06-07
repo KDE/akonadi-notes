@@ -22,7 +22,7 @@
 
 #include "akonadi-notes_export.h"
 
-#include <QtCore/QUrl>
+#include <QUrl>
 #include <QMap>
 class QDateTime;
 class QString;
