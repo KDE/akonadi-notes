@@ -104,7 +104,7 @@ Attachment::~Attachment()
 
 bool Attachment::operator==(const Attachment &a) const
 {
-    const Q_D(Attachment);
+    Q_D(const Attachment);
     if (d->mUrl.isEmpty()) {
         return d->mUrl == a.d_func()->mUrl &&
                d->mMimetype == a.d_func()->mMimetype &&
@@ -122,19 +122,19 @@ void Attachment::operator=(const Attachment &a)
 
 QUrl Attachment::url() const
 {
-    const Q_D(Attachment);
+    Q_D(const Attachment);
     return d->mUrl;
 }
 
 QByteArray Attachment::data() const
 {
-    const Q_D(Attachment);
+    Q_D(const Attachment);
     return d->mData;
 }
 
 QString Attachment::mimetype() const
 {
-    const Q_D(Attachment);
+    Q_D(const Attachment);
     return d->mMimetype;
 }
 
@@ -146,7 +146,7 @@ void Attachment::setLabel(const QString &label)
 
 QString Attachment::label() const
 {
-    const Q_D(Attachment);
+    Q_D(const Attachment);
     return d->mLabel;
 }
 
@@ -362,7 +362,7 @@ NoteMessageWrapper::~NoteMessageWrapper()
 
 KMime::MessagePtr NoteMessageWrapper::message() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     KMime::MessagePtr msg = KMime::MessagePtr(new KMime::Message());
 
     QString title = i18nc("The default name for new notes.", "New Note");
@@ -443,7 +443,7 @@ void NoteMessageWrapper::setUid(const QString &uid)
 
 QString NoteMessageWrapper::uid() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     return d->uid;
 }
 
@@ -455,7 +455,7 @@ void NoteMessageWrapper::setClassification(NoteMessageWrapper::Classification cl
 
 NoteMessageWrapper::Classification NoteMessageWrapper::classification() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     return d->classification;
 }
 
@@ -467,7 +467,7 @@ void NoteMessageWrapper::setLastModifiedDate(const QDateTime &lastModifiedDate)
 
 QDateTime NoteMessageWrapper::lastModifiedDate() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     return d->lastModifiedDate;
 }
 
@@ -479,7 +479,7 @@ void NoteMessageWrapper::setCreationDate(const QDateTime &creationDate)
 
 QDateTime NoteMessageWrapper::creationDate() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     return d->creationDate;
 }
 
@@ -491,7 +491,7 @@ void NoteMessageWrapper::setFrom(const QString &from)
 
 QString NoteMessageWrapper::from() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     return d->from;
 }
 
@@ -503,7 +503,7 @@ void NoteMessageWrapper::setTitle(const QString &title)
 
 QString NoteMessageWrapper::title() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     return d->title;
 }
 
@@ -516,19 +516,19 @@ void NoteMessageWrapper::setText(const QString &text, Qt::TextFormat format)
 
 QString NoteMessageWrapper::text() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     return d->text;
 }
 
 Qt::TextFormat NoteMessageWrapper::textFormat() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     return d->textFormat;
 }
 
 QString NoteMessageWrapper::toPlainText() const
 {
-    const Q_D(NoteMessageWrapper);
+    Q_D(const NoteMessageWrapper);
     if (d->textFormat == Qt::PlainText) {
         return d->text;
     }
