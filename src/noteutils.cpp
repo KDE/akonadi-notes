@@ -154,13 +154,10 @@ class Q_DECL_HIDDEN NoteMessageWrapper::NoteMessageWrapperPrivate
 {
 public:
     NoteMessageWrapperPrivate()
-        : classification(Public)
     {
     }
 
     NoteMessageWrapperPrivate(const KMime::MessagePtr &msg)
-        : classification(Public)
-        , textFormat(Qt::PlainText)
     {
         readMimeMessage(msg);
     }
@@ -181,8 +178,8 @@ public:
     QDateTime lastModifiedDate;
     QMap< QString, QString > custom;
     QVector<Attachment> attachments;
-    Classification classification;
-    Qt::TextFormat textFormat;
+    Classification classification = Public;
+    Qt::TextFormat textFormat = Qt::PlainText;
 };
 
 void NoteMessageWrapper::NoteMessageWrapperPrivate::readMimeMessage(const KMime::MessagePtr &msg)
