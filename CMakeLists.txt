@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-set(PIM_VERSION "5.9.40")
+set(PIM_VERSION "5.9.80")
 
 project(Akonadi-Notes VERSION ${PIM_VERSION})
 
