@@ -4,9 +4,9 @@ set(PIM_VERSION "5.10.40")
 project(Akonadi-Notes VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_VERSION "5.53.0")
+set(KF5_MIN_VERSION "5.53.0")
 
-find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
+find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
@@ -37,7 +37,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX AKONADINOTES
 ########### Find packages ###########
 find_package(Qt5Xml ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
 
-find_package(KF5I18n ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Mime ${KMIMELIB_VERSION} CONFIG REQUIRED)
 
 find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
