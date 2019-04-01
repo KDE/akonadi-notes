@@ -20,12 +20,12 @@
 #include "noteutils.h"
 
 #include <KLocalizedString>
-#include <qdatetime.h>
+#include <QDateTime>
 #include <kmime/kmime_message.h>
 #include "akonadi_notes_debug.h"
 
-#include <qstring.h>
-#include <quuid.h>
+#include <QString>
+#include <QUuid>
 #include <qdom.h>
 
 namespace Akonadi
