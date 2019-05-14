@@ -20,8 +20,6 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
-
-
 set(QT_REQUIRED_VERSION "5.10.0")
 set(AKONADI_NOTES_VERSION ${PIM_VERSION})
 
@@ -39,19 +37,12 @@ find_package(Qt5Xml ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
 
 find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Mime ${KMIMELIB_VERSION} CONFIG REQUIRED)
-
-find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
-
 ########### Targets ###########
 
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadinotes5\")
 
-# workaround for https://bugreports.qt.io/browse/QTBUG-74665 (bug in qt5.13 reevaluate it)
-if (${Qt5Widgets_VERSION} STRGREATER "5.13")
-   MESSAGE(STATUS "Qt version: ${Qt5Widgets_VERSION} DISABLE compile without deprecated methods. bug QTBUG-74665")
-else()
-   add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
-endif()
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
+
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
 add_subdirectory(src)
