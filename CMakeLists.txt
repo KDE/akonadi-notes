@@ -20,7 +20,7 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
-set(QT_REQUIRED_VERSION "5.10.0")
+set(QT_REQUIRED_VERSION "5.11.0")
 set(AKONADI_NOTES_VERSION ${PIM_VERSION})
 
 set(KMIMELIB_VERSION "5.11.40")
