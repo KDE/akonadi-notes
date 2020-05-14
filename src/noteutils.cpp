@@ -425,6 +425,7 @@ KMime::MessagePtr NoteMessageWrapper::message() const
         msg->addContent(d->createCustomPart());
     }
 
+    msg->mainBodyPart()->contentType(true)->setCharset(ENCODING);
     msg->mainBodyPart()->fromUnicodeString(text);
     msg->mainBodyPart()->contentType(true)->setMimeType(d->textFormat == Qt::RichText ? "text/html" : "text/plain");
 
