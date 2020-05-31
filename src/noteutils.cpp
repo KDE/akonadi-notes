@@ -72,8 +72,10 @@ public:
 
     QUrl mUrl;
     QByteArray mData;
+    bool mDataBase64Encoded = false;
     QString mMimetype;
     QString mLabel;
+    QString mContentID;
 };
 
 Attachment::Attachment()
@@ -107,11 +109,15 @@ bool Attachment::operator==(const Attachment &a) const
     Q_D(const Attachment);
     if (d->mUrl.isEmpty()) {
         return d->mUrl == a.d_func()->mUrl &&
+               d->mDataBase64Encoded == a.d_func()->mDataBase64Encoded &&
                d->mMimetype == a.d_func()->mMimetype &&
+               d->mContentID == a.d_func()->mContentID &&
                d->mLabel == a.d_func()->mLabel;
     }
     return d->mData == a.d_func()->mData &&
+           d->mDataBase64Encoded == a.d_func()->mDataBase64Encoded &&
            d->mMimetype == a.d_func()->mMimetype &&
+           d->mContentID == a.d_func()->mContentID &&
            d->mLabel == a.d_func()->mLabel;
 }
 
@@ -130,6 +136,30 @@ QByteArray Attachment::data() const
 {
     Q_D(const Attachment);
     return d->mData;
+}
+
+void Attachment::setDataBase64Encoded(bool encoded)
+{
+    Q_D(Attachment);
+    d->mDataBase64Encoded = true;
+}
+
+bool Attachment::dataBase64Encoded() const
+{
+    Q_D(const Attachment);
+    return d->mDataBase64Encoded;
+}
+
+void Attachment::setContentID(const QString &contentID)
+{
+    Q_D(Attachment);
+    d->mContentID = contentID;
+}
+
+QString Attachment::contentID() const
+{
+    Q_D(const Attachment);
+    return d->mContentID;
 }
 
 QString Attachment::mimetype() const
@@ -320,8 +350,14 @@ KMime::Content *NoteMessageWrapper::NoteMessageWrapperPrivate::createAttachmentP
         content->appendHeader(header);
     }
     content->contentTransferEncoding()->setEncoding(KMime::Headers::CEbase64);
+    if (a.dataBase64Encoded()) {
+        content->contentTransferEncoding()->setDecoded(false);
+    }
     content->contentDisposition()->setDisposition(KMime::Headers::CDattachment);
     content->contentDisposition()->setFilename(QStringLiteral("attachment"));
+    if (!a.contentID().isEmpty()) {
+        content->contentID()->setIdentifier(a.contentID().toLatin1());
+    }
     return content;
 }
 
@@ -334,10 +370,12 @@ void NoteMessageWrapper::NoteMessageWrapperPrivate::parseAttachmentPart(KMime::C
     if (KMime::Headers::Base *header = part->headerByType(X_NOTES_URL_HEADER)) {
         Attachment attachment(QUrl(header->asUnicodeString()), QLatin1String(part->contentType()->mimeType()));
         attachment.setLabel(label);
+        attachment.setContentID(QString::fromLatin1(part->contentID()->identifier()));
         attachments.append(attachment);
     } else {
         Attachment attachment(part->decodedContent(), QLatin1String(part->contentType()->mimeType()));
         attachment.setLabel(label);
+        attachment.setContentID(QString::fromLatin1(part->contentID()->identifier()));
         attachments.append(attachment);
     }
 }

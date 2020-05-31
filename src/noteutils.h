@@ -84,6 +84,37 @@ public:
     QByteArray data() const;
 
     /**
+     * Sets the unique identifier of the attachment
+     *
+     * It can be used to refer to attachment from the note itself
+     *
+     * @since 5.15
+     */
+    void setContentID(const QString &contentID);
+
+    /**
+     * Returns the unique identifier for inline attachment
+     *
+     * @since 5.15
+     */
+    QString contentID() const;
+
+   /**
+     * Set this to true if inline data provided via ctor
+     * is alredy base64 encoded. Default value is false.
+     *
+     * @since 5.15
+     */
+    void setDataBase64Encoded(bool encoded);
+
+    /**
+     * Returns true if data is already base64-encoded
+     *
+     * @since 5.15
+     */
+    bool dataBase64Encoded() const;
+
+   /**
      * Returns the mimetype
      */
     QString mimetype() const;
