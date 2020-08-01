@@ -11,6 +11,7 @@
 #include <kmime/kmime_message.h>
 #include "akonadi_notes_debug.h"
 
+#include <QRegularExpression>
 #include <QString>
 #include <QUuid>
 #include <qdom.h>
@@ -557,11 +558,10 @@ QString NoteMessageWrapper::toPlainText() const
     }
 
     //From cleanHtml in kdepimlibs/kcalutils/incidenceformatter.cpp
-    QRegExp rx(QStringLiteral("<body[^>]*>(.*)</body>"), Qt::CaseInsensitive);
-    rx.indexIn(d->text);
-    QString body = rx.cap(1);
+    const QRegularExpression rx(QStringLiteral("<body[^>]*>(.*)</body>"), QRegularExpression::CaseInsensitiveOption);
+    QString body = rx.match(d->text).captured(1);
 
-    return body.remove(QRegExp(QStringLiteral("<[^>]*>"))).trimmed().toHtmlEscaped();
+    return body.remove(QRegularExpression(QStringLiteral("<[^>]*>"))).trimmed().toHtmlEscaped();
 }
 
 QVector<Attachment> &NoteMessageWrapper::attachments()
