@@ -58,7 +58,7 @@ install(FILES
 
 ecm_generate_pri_file(BASE_NAME AkonadiNotes
     LIB_NAME KF5AkonadiNotes
-    DEPS "Mime" FILENAME_VAR PRI_FILENAME
+    DEPS "KMime" FILENAME_VAR PRI_FILENAME
     )
 
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
