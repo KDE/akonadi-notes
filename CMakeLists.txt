@@ -21,7 +21,7 @@ include(ECMSetupVersion)
 include(FeatureSummary)
 include(ECMQtDeclareLoggingCategory)
 
-set(QT_REQUIRED_VERSION "5.13.0")
+set(QT_REQUIRED_VERSION "5.14.0")
 set(AKONADI_NOTES_VERSION ${PIM_VERSION})
 
 set(KMIMELIB_VERSION "5.16.40")
