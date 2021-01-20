@@ -47,6 +47,8 @@ add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054F00)
 
 
 add_definitions(-DQT_NO_KEYWORDS)
+add_definitions(-DQT_NO_FOREACH)
+
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(src)
