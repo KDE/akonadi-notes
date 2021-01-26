@@ -9,12 +9,12 @@
 
 #include "akonadi-notes_export.h"
 
-#include <QUrl>
 #include <QMap>
+#include <QUrl>
 class QDateTime;
 class QString;
 
-template <typename T> class QSharedPointer;
+template<typename T> class QSharedPointer;
 
 namespace KMime
 {
@@ -25,23 +25,22 @@ namespace Akonadi
 {
 namespace NoteUtils
 {
-
 /**
-* @return mimetype for notes
-* @since 4.8
-*/
+ * @return mimetype for notes
+ * @since 4.8
+ */
 AKONADI_NOTES_EXPORT QString noteMimeType();
 
 /**
-* @return icon for notes
-* @since 4.8
-*/
+ * @return icon for notes
+ * @since 4.8
+ */
 AKONADI_NOTES_EXPORT QString noteIconName();
 
 /**
-* An attachment for a note
-* @since 4.9
-*/
+ * An attachment for a note
+ * @since 4.9
+ */
 class AKONADI_NOTES_EXPORT Attachment
 {
 public:
@@ -86,7 +85,7 @@ public:
      */
     QString contentID() const;
 
-   /**
+    /**
      * Set this to true if inline data provided via ctor
      * is alredy base64 encoded. Default value is false.
      *
@@ -101,7 +100,7 @@ public:
      */
     bool dataBase64Encoded() const;
 
-   /**
+    /**
      * Returns the mimetype
      */
     QString mimetype() const;
@@ -115,6 +114,7 @@ public:
      * Returns the label of the attachment
      */
     QString label() const;
+
 private:
     //@cond PRIVATE
     class AttachmentPrivate;
@@ -124,43 +124,43 @@ private:
 };
 
 /**
-* A convenience wrapper around KMime::MessagePtr for notes
-*
-* This is the format used by the Akonotes Resource
-*
-* A note has the following properties:
-* uid: globally unique identifier (generated if empty)
-* creationDate: timestamp when the note was created (generated if empty)
-* lastModified: lastModified (generated if empty)
-* classification: one of private, confidential, public. This is only meant as an indication to the user.
-* title: title of the note
-* text: textual content
-* from: author (generated if empty)
-* attachments: inline or url only
-* custom: key value pair for custom values
-*
-* Reading a note from an Akonotes akonadi item:
-* @code
-* if ( item.hasPayload<KMime::MessagePtr>() ) {
-*   NoteUtils::NoteMessageWrapper note(item.payload<KMime::MessagePtr>());
-*   qCDebug(AKONADINOTES_LOG) << note.text();
-*   textIsRich = messageWrapper.textFormat() == Qt::RichText;
-* }
-* @endcode
-*
-* Setting the note as payload of an akonadi Item
-* @code
-* item.setMimeType(NoteUtils::noteMimeType());
-* NoteUtils::NoteMessageWrapper note;
-* note.setTitle( "title" );
-* note.setText( "text" );
-* note.setFrom( QString::fromLatin1( "MyApplication@kde4" ) );
-* item.setPayload( note.message() );
-* @endcode
-*
-* @author Christian Mollekopf <chrigi_1@fastmail.fm>
-* @since 4.8
-*/
+ * A convenience wrapper around KMime::MessagePtr for notes
+ *
+ * This is the format used by the Akonotes Resource
+ *
+ * A note has the following properties:
+ * uid: globally unique identifier (generated if empty)
+ * creationDate: timestamp when the note was created (generated if empty)
+ * lastModified: lastModified (generated if empty)
+ * classification: one of private, confidential, public. This is only meant as an indication to the user.
+ * title: title of the note
+ * text: textual content
+ * from: author (generated if empty)
+ * attachments: inline or url only
+ * custom: key value pair for custom values
+ *
+ * Reading a note from an Akonotes akonadi item:
+ * @code
+ * if ( item.hasPayload<KMime::MessagePtr>() ) {
+ *   NoteUtils::NoteMessageWrapper note(item.payload<KMime::MessagePtr>());
+ *   qCDebug(AKONADINOTES_LOG) << note.text();
+ *   textIsRich = messageWrapper.textFormat() == Qt::RichText;
+ * }
+ * @endcode
+ *
+ * Setting the note as payload of an akonadi Item
+ * @code
+ * item.setMimeType(NoteUtils::noteMimeType());
+ * NoteUtils::NoteMessageWrapper note;
+ * note.setTitle( "title" );
+ * note.setText( "text" );
+ * note.setFrom( QString::fromLatin1( "MyApplication@kde4" ) );
+ * item.setPayload( note.message() );
+ * @endcode
+ *
+ * @author Christian Mollekopf <chrigi_1@fastmail.fm>
+ * @since 4.8
+ */
 class AKONADI_NOTES_EXPORT NoteMessageWrapper
 {
 public:
@@ -169,112 +169,108 @@ public:
     ~NoteMessageWrapper();
 
     /**
-      * Set the uid of the note
-      * @param uid should be globally unique
-      */
+     * Set the uid of the note
+     * @param uid should be globally unique
+     */
     void setUid(const QString &uid);
 
     /**
-      * Returns the uid of the note
-      */
+     * Returns the uid of the note
+     */
     QString uid() const;
 
-    enum Classification {
-        Public,
-        Private,
-        Confidential
-    };
+    enum Classification { Public, Private, Confidential };
 
     /**
-      * Set the classification of the note
-      */
+     * Set the classification of the note
+     */
     void setClassification(Classification);
 
     /**
-      * Returns the classification of the note
-      */
+     * Returns the classification of the note
+     */
     Classification classification() const;
 
     /**
-      * Set the title of the note
-      */
+     * Set the title of the note
+     */
     void setTitle(const QString &title);
 
     /**
-      * Returns the title of the note
-      */
+     * Returns the title of the note
+     */
     QString title() const;
 
     /**
-      * Set the text of the note
-      *
-      * @param format only Qt::PlainText and Qt::RichText is supported
-      */
+     * Set the text of the note
+     *
+     * @param format only Qt::PlainText and Qt::RichText is supported
+     */
     void setText(const QString &text, Qt::TextFormat format = Qt::PlainText);
 
     /**
-      * Returns the text of the note
-      */
+     * Returns the text of the note
+     */
     QString text() const;
 
     /**
-      * @return Qt::PlainText or Qt::RichText
-      */
+     * @return Qt::PlainText or Qt::RichText
+     */
     Qt::TextFormat textFormat() const;
 
     /**
-      * @return plaintext version of the text (if richtext)
-      */
+     * @return plaintext version of the text (if richtext)
+     */
     QString toPlainText() const;
 
     /**
-      * Set the creation date of the note (stored in the mime header)
-      */
+     * Set the creation date of the note (stored in the mime header)
+     */
     void setCreationDate(const QDateTime &creationDate);
 
     /**
-      * Returns the creation date of the note
-      */
+     * Returns the creation date of the note
+     */
     QDateTime creationDate() const;
 
     /**
-      * Set the lastModified-date of the note
-      */
+     * Set the lastModified-date of the note
+     */
     void setLastModifiedDate(const QDateTime &lastModifiedDate);
 
     /**
-      * Returns the lastModified-date of the note
-      */
+     * Returns the lastModified-date of the note
+     */
     QDateTime lastModifiedDate() const;
 
     /**
-      * Set the origin (creator) of the note (stored in the mime header)
-      * This is usually the application creating the note.
-      * @param from must be an address in the style of foo@kde.org.
-      */
+     * Set the origin (creator) of the note (stored in the mime header)
+     * This is usually the application creating the note.
+     * @param from must be an address in the style of foo@kde.org.
+     */
     void setFrom(const QString &from);
 
     /**
-      * Returns the origin (creator) of the note
-      */
+     * Returns the origin (creator) of the note
+     */
     QString from() const;
 
     /**
-      * Returns a reference to the list of attachments of the note
-      */
+     * Returns a reference to the list of attachments of the note
+     */
     QVector<Attachment> &attachments();
 
     /**
-      * Returns a reference to the custom-value map
-      * @return key-value map containing all custom values
-      */
+     * Returns a reference to the custom-value map
+     * @return key-value map containing all custom values
+     */
     QMap<QString, QString> &custom();
 
     /**
-      * Assemble a KMime message with the given values
-      *
-      * The message can then i.e. be stored inside an akonadi item
-      */
+     * Assemble a KMime message with the given values
+     *
+     * The message can then i.e. be stored inside an akonadi item
+     */
     KMime::MessagePtr message() const;
 
 private:

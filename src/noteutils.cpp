@@ -6,10 +6,10 @@
 
 #include "noteutils.h"
 
+#include "akonadi_notes_debug.h"
 #include <KLocalizedString>
 #include <QDateTime>
 #include <kmime/kmime_message.h>
-#include "akonadi_notes_debug.h"
 
 #include <QRegularExpression>
 #include <QString>
@@ -20,7 +20,6 @@ namespace Akonadi
 {
 namespace NoteUtils
 {
-
 #define X_NOTES_UID_HEADER "X-Akonotes-UID"
 #define X_NOTES_LASTMODIFIED_HEADER "X-Akonotes-LastModified"
 #define X_NOTES_CLASSIFICATION_HEADER "X-Akonotes-Classification"
@@ -69,7 +68,6 @@ public:
 Attachment::Attachment()
     : d_ptr(new Attachment::AttachmentPrivate(QUrl(), QString()))
 {
-
 }
 
 Attachment::Attachment(const QUrl &url, const QString &mimetype)
@@ -96,17 +94,11 @@ bool Attachment::operator==(const Attachment &a) const
 {
     Q_D(const Attachment);
     if (d->mUrl.isEmpty()) {
-        return d->mUrl == a.d_func()->mUrl &&
-               d->mDataBase64Encoded == a.d_func()->mDataBase64Encoded &&
-               d->mMimetype == a.d_func()->mMimetype &&
-               d->mContentID == a.d_func()->mContentID &&
-               d->mLabel == a.d_func()->mLabel;
+        return d->mUrl == a.d_func()->mUrl && d->mDataBase64Encoded == a.d_func()->mDataBase64Encoded && d->mMimetype == a.d_func()->mMimetype
+            && d->mContentID == a.d_func()->mContentID && d->mLabel == a.d_func()->mLabel;
     }
-    return d->mData == a.d_func()->mData &&
-           d->mDataBase64Encoded == a.d_func()->mDataBase64Encoded &&
-           d->mMimetype == a.d_func()->mMimetype &&
-           d->mContentID == a.d_func()->mContentID &&
-           d->mLabel == a.d_func()->mLabel;
+    return d->mData == a.d_func()->mData && d->mDataBase64Encoded == a.d_func()->mDataBase64Encoded && d->mMimetype == a.d_func()->mMimetype
+        && d->mContentID == a.d_func()->mContentID && d->mLabel == a.d_func()->mLabel;
 }
 
 void Attachment::operator=(const Attachment &a)
@@ -194,7 +186,7 @@ public:
     QString from;
     QDateTime creationDate;
     QDateTime lastModifiedDate;
-    QMap< QString, QString > custom;
+    QMap<QString, QString> custom;
     QVector<Attachment> attachments;
     Classification classification = Public;
     Qt::TextFormat textFormat = Qt::PlainText;
@@ -207,7 +199,7 @@ void NoteMessageWrapper::NoteMessageWrapperPrivate::readMimeMessage(const KMime:
         return;
     }
     title = msg->subject(true)->asUnicodeString();
-    text = msg->mainBodyPart()->decodedText(true);   //remove trailing whitespace, so we get rid of "  " in empty notes
+    text = msg->mainBodyPart()->decodedText(true); // remove trailing whitespace, so we get rid of "  " in empty notes
     if (msg->from(false)) {
         from = msg->from(false)->asUnicodeString();
     }
@@ -282,8 +274,8 @@ KMime::Content *NoteMessageWrapper::NoteMessageWrapperPrivate::createCustomPart(
     QDomDocument document = createXMLDocument();
     QDomElement element = document.createElement(QStringLiteral("custom"));
     element.setAttribute(QStringLiteral("version"), QStringLiteral("1.0"));
-    QMap <QString, QString >::const_iterator end = custom.end();
-    for (QMap <QString, QString >::const_iterator it = custom.begin(); it != end; ++it) {
+    QMap<QString, QString>::const_iterator end = custom.end();
+    for (QMap<QString, QString>::const_iterator it = custom.begin(); it != end; ++it) {
         QDomElement e = element.ownerDocument().createElement(it.key());
         QDomText t = element.ownerDocument().createTextNode(it.value());
         e.appendChild(t);
@@ -302,8 +294,7 @@ void NoteMessageWrapper::NoteMessageWrapperPrivate::parseCustomPart(KMime::Conte
     }
     QDomElement top = document.documentElement();
     if (top.tagName() != QLatin1String("custom")) {
-        qWarning("XML error: Top tag was %s instead of the expected custom",
-                 top.tagName().toLatin1().data());
+        qWarning("XML error: Top tag was %s instead of the expected custom", top.tagName().toLatin1().data());
         return;
     }
 
@@ -369,12 +360,12 @@ void NoteMessageWrapper::NoteMessageWrapperPrivate::parseAttachmentPart(KMime::C
 }
 
 NoteMessageWrapper::NoteMessageWrapper()
-    :  d_ptr(new NoteMessageWrapperPrivate())
+    : d_ptr(new NoteMessageWrapperPrivate())
 {
 }
 
 NoteMessageWrapper::NoteMessageWrapper(const KMime::MessagePtr &msg)
-    :  d_ptr(new NoteMessageWrapperPrivate(msg))
+    : d_ptr(new NoteMessageWrapperPrivate(msg))
 {
 }
 
@@ -436,7 +427,7 @@ KMime::MessagePtr NoteMessageWrapper::message() const
         classification = CLASSIFICATION_CONFIDENTIAL;
         break;
     default:
-        //do nothing
+        // do nothing
         break;
     }
     header = new KMime::Headers::Generic(X_NOTES_CLASSIFICATION_HEADER);
@@ -557,7 +548,7 @@ QString NoteMessageWrapper::toPlainText() const
         return d->text;
     }
 
-    //From cleanHtml in kdepimlibs/kcalutils/incidenceformatter.cpp
+    // From cleanHtml in kdepimlibs/kcalutils/incidenceformatter.cpp
     const QRegularExpression rx(QStringLiteral("<body[^>]*>(.*)</body>"), QRegularExpression::CaseInsensitiveOption);
     QString body = rx.match(d->text).captured(1);
 
@@ -570,7 +561,7 @@ QVector<Attachment> &NoteMessageWrapper::attachments()
     return d->attachments;
 }
 
-QMap< QString, QString > &NoteMessageWrapper::custom()
+QMap<QString, QString> &NoteMessageWrapper::custom()
 {
     Q_D(NoteMessageWrapper);
     return d->custom;
@@ -586,5 +577,5 @@ QString noteMimeType()
     return QStringLiteral("text/x-vnd.akonadi.note");
 }
 
-} //End Namespace
-} //End Namespace
+} // End Namespace
+} // End Namespace

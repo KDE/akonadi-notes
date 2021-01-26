@@ -6,9 +6,9 @@
 
 #include "noteutils.h"
 
-#include <QTest>
-#include <QHash>
 #include <QDebug>
+#include <QHash>
+#include <QTest>
 
 #include <QDateTime>
 #include <kmime/kmime_message.h>
@@ -31,13 +31,14 @@ private Q_SLOTS:
         note.setLastModifiedDate(QDateTime(QDate(2012, 3, 3), QTime(4, 4, 4), Qt::UTC));
         Attachment a("testfile2", QStringLiteral("mimetype/mime3"));
         a.setLabel(QStringLiteral("label"));
-        note.attachments() << Attachment(QUrl(QStringLiteral("file://url/to/file")), QStringLiteral("mimetype/mime")) << Attachment("testfile", QStringLiteral("mimetype/mime2")) << a;
+        note.attachments() << Attachment(QUrl(QStringLiteral("file://url/to/file")), QStringLiteral("mimetype/mime"))
+                           << Attachment("testfile", QStringLiteral("mimetype/mime2")) << a;
         note.custom().insert(QStringLiteral("key1"), QStringLiteral("value1"));
         note.custom().insert(QStringLiteral("key2"), QStringLiteral("value2"));
         note.custom().insert(QStringLiteral("key3"), QStringLiteral("value3"));
 
         KMime::MessagePtr msg = note.message();
-//       qWarning() << msg->encodedContent();
+        //       qWarning() << msg->encodedContent();
 
         NoteMessageWrapper result(msg);
 
@@ -52,7 +53,7 @@ private Q_SLOTS:
         QCOMPARE(result.custom(), note.custom());
         QCOMPARE(result.attachments(), note.attachments());
 
-//       qWarning() << result.message()->encodedContent();
+        //       qWarning() << result.message()->encodedContent();
     }
 
     void createIfEmpty()
@@ -66,7 +67,8 @@ private Q_SLOTS:
     void testNormalTextWithoutAttachments()
     {
         NoteMessageWrapper note;
-        QString text(QStringLiteral("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\"> \
+        QString text(
+            QStringLiteral("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\"> \
             <html> \
               <head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\"> p, li { white-space: pre-wrap; } </style></head> \
               <body style=\"font-family:'Sans Serif'; font-size:9pt;\"> <p>sdfg</p></body> \
@@ -83,7 +85,8 @@ private Q_SLOTS:
     void testRichTextWithoutAttachments()
     {
         NoteMessageWrapper note;
-        QString text(QStringLiteral("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\"> \
+        QString text(
+            QStringLiteral("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\"> \
             <html> \
               <head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\"> p, li { white-space: pre-wrap; } </style></head> \
               <body style=\"font-family:'Sans Serif'; font-size:9pt;\"> <p>sdfg</p></body> \
@@ -100,7 +103,8 @@ private Q_SLOTS:
     void testRichTextWithAttachments()
     {
         NoteMessageWrapper note;
-        QString text(QStringLiteral("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\"> \
+        QString text(
+            QStringLiteral("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\"> \
             <html> \
               <head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\"> p, li { white-space: pre-wrap; } </style></head> \
               <body style=\"font-family:'Sans Serif'; font-size:9pt;\"> <p>sdfg</p></body> \
@@ -118,7 +122,6 @@ private Q_SLOTS:
         QCOMPARE(result.textFormat(), Qt::RichText);
         QCOMPARE(result.attachments(), note.attachments());
     }
-
 };
 
 QTEST_MAIN(NotesTest)
