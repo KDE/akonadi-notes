@@ -19,6 +19,9 @@ include(ECMGeneratePriFile)
 
 include(ECMSetupVersion)
 include(FeatureSummary)
+if(ECM_VERSION VERSION_GREATER_EQUAL 5.79)
+   include(KDEGitCommitHooks)
+endif()
 include(ECMQtDeclareLoggingCategory)
 
 set(QT_REQUIRED_VERSION "5.14.0")
@@ -78,4 +81,7 @@ install(FILES
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel
     )
 
+if(ECM_VERSION VERSION_GREATER_EQUAL 5.79)
+    kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+endif()
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
