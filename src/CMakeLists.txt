@@ -19,7 +19,7 @@ target_link_libraries(KF5AkonadiNotes
     PUBLIC
     KF5::Mime
     PRIVATE
-    Qt::Xml
+    Qt5::Xml
     KF5::I18n
     )
 
