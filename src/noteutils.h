@@ -4,8 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef NOTEUTILS_H
-#define NOTEUTILS_H
+#pragma once
 
 #include "akonadi-notes_export.h"
 
@@ -286,4 +285,3 @@ private:
 }
 
 Q_DECLARE_TYPEINFO(Akonadi::NoteUtils::Attachment, Q_MOVABLE_TYPE);
-#endif
