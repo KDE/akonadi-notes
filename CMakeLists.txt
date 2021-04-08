@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 set(PIM_VERSION "5.17.40")
 
 project(Akonadi-Notes VERSION ${PIM_VERSION})
@@ -22,7 +22,7 @@ include(FeatureSummary)
 include(KDEGitCommitHooks)
 include(ECMQtDeclareLoggingCategory)
 
-set(QT_REQUIRED_VERSION "5.14.0")
+set(QT_REQUIRED_VERSION "5.15.0")
 set(AKONADI_NOTES_VERSION ${PIM_VERSION})
 
 set(KMIMELIB_VERSION "5.17.40")
@@ -44,7 +44,7 @@ find_package(KF5Mime ${KMIMELIB_VERSION} CONFIG REQUIRED)
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadinotes5\")
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055100)
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055200)
 
 
 
