@@ -24,7 +24,7 @@ target_link_libraries(KF5AkonadiNotes
     )
 
 set_target_properties(KF5AkonadiNotes PROPERTIES
-    VERSION ${AKONADINOTES_VERSION_STRING}
+    VERSION ${AKONADINOTES_VERSION}
     SOVERSION ${AKONADINOTES_SOVERSION}
     EXPORT_NAME AkonadiNotes
     )
