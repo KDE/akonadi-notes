@@ -1,14 +1,14 @@
-set(akonadinotes_LIB_SRC
+add_library(KF5AkonadiNotes)
+add_library(KF5::KF5AkonadiNotes ALIAS KF5AkonadiNotes)
+
+target_sources(KF5AkonadiNotes PRIVATE
     noteutils.cpp
     )
 
-ecm_qt_declare_logging_category(akonadinotes_LIB_SRC HEADER akonadi_notes_debug.h IDENTIFIER AKONADINOTES_LOG CATEGORY_NAME log_akonadi_notes)
-
-add_library(KF5AkonadiNotes ${akonadinotes_LIB_SRC})
+ecm_qt_declare_logging_category(KF5AkonadiNotes HEADER akonadi_notes_debug.h IDENTIFIER AKONADINOTES_LOG CATEGORY_NAME log_akonadi_notes)
 
 generate_export_header(KF5AkonadiNotes BASE_NAME akonadi-notes)
 
-add_library(KF5::KF5AkonadiNotes ALIAS KF5AkonadiNotes)
 
 kde_target_enable_exceptions(KF5AkonadiNotes PUBLIC)
 
