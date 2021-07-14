@@ -86,7 +86,7 @@ public:
 
     /**
      * Set this to true if inline data provided via ctor
-     * is alredy base64 encoded. Default value is false.
+     * is already base64 encoded. Default value is false.
      *
      * @since 5.15
      */
