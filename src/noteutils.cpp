@@ -254,7 +254,8 @@ QDomDocument createXMLDocument()
 QDomDocument loadDocument(KMime::Content *part)
 {
     QString errorMsg;
-    int errorLine, errorColumn;
+    int errorLine;
+    int errorColumn;
     QDomDocument document;
     bool ok = document.setContent(part->body(), &errorMsg, &errorLine, &errorColumn);
     if (!ok) {
