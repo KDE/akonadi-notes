@@ -62,3 +62,26 @@ ecm_generate_pri_file(BASE_NAME AkonadiNotes
     )
 
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
+
+if (BUILD_QCH)
+    ecm_add_qch(
+        KF5AkonadiNotes_QCH
+        NAME KF5AkonadiNotes
+        BASE_NAME KF5AkonadiNotes
+        VERSION ${PIM_VERSION}
+        ORG_DOMAIN org.kde
+        SOURCES # using only public headers, to cover only public API
+            ${AkonadiNotes_HEADERS}
+        #MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
+        #IMAGE_DIRS "${CMAKE_SOURCE_DIR}/docs/pics"
+        LINK_QCHS
+            Qt5Core_QCH
+        INCLUDE_DIRS
+            ${CMAKE_CURRENT_BINARY_DIR}
+        BLANK_MACROS
+            AKONADI_NOTES_EXPORT
+        TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
+        QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
+        COMPONENT Devel
+    )
+endif()
