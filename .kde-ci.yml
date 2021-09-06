@@ -4,5 +4,5 @@
 Dependencies:
 - 'on': ['@all']
   'require':
-    'kde/pim/akonadi' : '@latest'
-    'kde/pim/kmime' : '@latest'
+    'kde/pim/akonadi' : '@same'
+    'kde/pim/kmime' : '@same'
