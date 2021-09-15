@@ -10,8 +10,8 @@
 #include <QHash>
 #include <QTest>
 
+#include <KMime/KMimeMessage>
 #include <QDateTime>
-#include <kmime/kmime_message.h>
 
 using namespace Akonadi::NoteUtils;
 class NotesTest : public QObject
