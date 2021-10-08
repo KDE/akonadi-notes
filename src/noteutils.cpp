@@ -85,10 +85,7 @@ Attachment::Attachment(const Attachment &other)
 {
 }
 
-Attachment::~Attachment()
-{
-    delete d_ptr;
-}
+Attachment::~Attachment() = default;
 
 bool Attachment::operator==(const Attachment &a) const
 {
@@ -370,10 +367,7 @@ NoteMessageWrapper::NoteMessageWrapper(const KMime::MessagePtr &msg)
 {
 }
 
-NoteMessageWrapper::~NoteMessageWrapper()
-{
-    delete d_ptr;
-}
+NoteMessageWrapper::~NoteMessageWrapper() = default;
 
 KMime::MessagePtr NoteMessageWrapper::message() const
 {

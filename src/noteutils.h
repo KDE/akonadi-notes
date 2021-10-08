@@ -10,6 +10,9 @@
 
 #include <QMap>
 #include <QUrl>
+
+#include <memory>
+
 class QDateTime;
 class QString;
 
@@ -117,7 +120,7 @@ public:
 private:
     //@cond PRIVATE
     class AttachmentPrivate;
-    AttachmentPrivate *const d_ptr;
+    std::unique_ptr<AttachmentPrivate> const d_ptr;
     Q_DECLARE_PRIVATE(Attachment)
     //@endcond
 };
@@ -276,7 +279,7 @@ private:
     //@cond PRIVATE
     Q_DISABLE_COPY(NoteMessageWrapper)
     class NoteMessageWrapperPrivate;
-    NoteMessageWrapperPrivate *const d_ptr;
+    std::unique_ptr<NoteMessageWrapperPrivate> const d_ptr;
     Q_DECLARE_PRIVATE(NoteMessageWrapper)
     //@endcond
 };
