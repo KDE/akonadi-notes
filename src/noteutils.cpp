@@ -37,7 +37,7 @@ namespace NoteUtils
 
 #define ENCODING "utf-8"
 
-class Q_DECL_HIDDEN Attachment::AttachmentPrivate
+class AttachmentPrivate
 {
 public:
     AttachmentPrivate(const QUrl &url, const QString &mimetype)
@@ -66,17 +66,17 @@ public:
 };
 
 Attachment::Attachment()
-    : d_ptr(new Attachment::AttachmentPrivate(QUrl(), QString()))
+    : d_ptr(new AttachmentPrivate(QUrl(), QString()))
 {
 }
 
 Attachment::Attachment(const QUrl &url, const QString &mimetype)
-    : d_ptr(new Attachment::AttachmentPrivate(url, mimetype))
+    : d_ptr(new AttachmentPrivate(url, mimetype))
 {
 }
 
 Attachment::Attachment(const QByteArray &data, const QString &mimetype)
-    : d_ptr(new Attachment::AttachmentPrivate(data, mimetype))
+    : d_ptr(new AttachmentPrivate(data, mimetype))
 {
 }
 
@@ -157,7 +157,7 @@ QString Attachment::label() const
     return d->mLabel;
 }
 
-class Q_DECL_HIDDEN NoteMessageWrapper::NoteMessageWrapperPrivate
+class NoteMessageWrapperPrivate
 {
 public:
     NoteMessageWrapperPrivate()
@@ -185,11 +185,11 @@ public:
     QDateTime lastModifiedDate;
     QMap<QString, QString> custom;
     QVector<Attachment> attachments;
-    Classification classification = Public;
+    NoteMessageWrapper::Classification classification = NoteMessageWrapper::Public;
     Qt::TextFormat textFormat = Qt::PlainText;
 };
 
-void NoteMessageWrapper::NoteMessageWrapperPrivate::readMimeMessage(const KMime::MessagePtr &msg)
+void NoteMessageWrapperPrivate::readMimeMessage(const KMime::MessagePtr &msg)
 {
     if (!msg.data()) {
         qCWarning(AKONADINOTES_LOG) << "Empty message";
@@ -219,9 +219,9 @@ void NoteMessageWrapper::NoteMessageWrapperPrivate::readMimeMessage(const KMime:
     if (KMime::Headers::Base *classificationHeader = msg->headerByType(X_NOTES_CLASSIFICATION_HEADER)) {
         const QString &c = classificationHeader->asUnicodeString();
         if (c == CLASSIFICATION_PRIVATE) {
-            classification = Private;
+            classification = NoteMessageWrapper::Private;
         } else if (c == CLASSIFICATION_CONFIDENTIAL) {
-            classification = Confidential;
+            classification = NoteMessageWrapper::Confidential;
         }
     }
 
@@ -263,7 +263,7 @@ QDomDocument loadDocument(KMime::Content *part)
     return document;
 }
 
-KMime::Content *NoteMessageWrapper::NoteMessageWrapperPrivate::createCustomPart() const
+KMime::Content *NoteMessageWrapperPrivate::createCustomPart() const
 {
     KMime::Content *content = new KMime::Content();
     auto header = new KMime::Headers::Generic(X_NOTES_CONTENTTYPE_HEADER);
@@ -284,7 +284,7 @@ KMime::Content *NoteMessageWrapper::NoteMessageWrapperPrivate::createCustomPart(
     return content;
 }
 
-void NoteMessageWrapper::NoteMessageWrapperPrivate::parseCustomPart(KMime::Content *part)
+void NoteMessageWrapperPrivate::parseCustomPart(KMime::Content *part)
 {
     QDomDocument document = loadDocument(part);
     if (document.isNull()) {
@@ -307,7 +307,7 @@ void NoteMessageWrapper::NoteMessageWrapperPrivate::parseCustomPart(KMime::Conte
     }
 }
 
-KMime::Content *NoteMessageWrapper::NoteMessageWrapperPrivate::createAttachmentPart(const Attachment &a) const
+KMime::Content *NoteMessageWrapperPrivate::createAttachmentPart(const Attachment &a) const
 {
     KMime::Content *content = new KMime::Content();
     auto header = new KMime::Headers::Generic(X_NOTES_CONTENTTYPE_HEADER);
@@ -338,7 +338,7 @@ KMime::Content *NoteMessageWrapper::NoteMessageWrapperPrivate::createAttachmentP
     return content;
 }
 
-void NoteMessageWrapper::NoteMessageWrapperPrivate::parseAttachmentPart(KMime::Content *part)
+void NoteMessageWrapperPrivate::parseAttachmentPart(KMime::Content *part)
 {
     QString label;
     if (KMime::Headers::Base *labelHeader = part->headerByType(X_NOTES_LABEL_HEADER)) {

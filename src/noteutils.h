@@ -39,6 +39,8 @@ AKONADI_NOTES_EXPORT QString noteMimeType();
  */
 AKONADI_NOTES_EXPORT QString noteIconName();
 
+class AttachmentPrivate;
+
 /**
  * An attachment for a note
  * @since 4.9
@@ -119,11 +121,12 @@ public:
 
 private:
     //@cond PRIVATE
-    class AttachmentPrivate;
     std::unique_ptr<AttachmentPrivate> const d_ptr;
     Q_DECLARE_PRIVATE(Attachment)
     //@endcond
 };
+
+class NoteMessageWrapperPrivate;
 
 /**
  * A convenience wrapper around KMime::MessagePtr for notes
@@ -278,7 +281,6 @@ public:
 private:
     //@cond PRIVATE
     Q_DISABLE_COPY(NoteMessageWrapper)
-    class NoteMessageWrapperPrivate;
     std::unique_ptr<NoteMessageWrapperPrivate> const d_ptr;
     Q_DECLARE_PRIVATE(NoteMessageWrapper)
     //@endcond
