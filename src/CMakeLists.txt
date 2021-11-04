@@ -3,6 +3,7 @@ add_library(KF5::KF5AkonadiNotes ALIAS KF5AkonadiNotes)
 
 target_sources(KF5AkonadiNotes PRIVATE
     noteutils.cpp
+    noteutils.h
     )
 
 ecm_qt_declare_logging_category(KF5AkonadiNotes HEADER akonadi_notes_debug.h IDENTIFIER AKONADINOTES_LOG CATEGORY_NAME log_akonadi_notes)
