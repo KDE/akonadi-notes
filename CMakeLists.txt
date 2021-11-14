@@ -4,7 +4,7 @@ set(PIM_VERSION "5.19.40")
 project(Akonadi-Notes VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_MIN_VERSION "5.87.0")
+set(KF5_MIN_VERSION "5.88.0")
 
 find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
@@ -34,8 +34,8 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 set(QT_REQUIRED_VERSION "5.15.2")
 set(AKONADI_NOTES_VERSION ${PIM_VERSION})
 
-set(KMIMELIB_VERSION "5.18.80")
-set(AKONADI_VERSION "5.18.80")
+set(KMIMELIB_VERSION "5.19.40")
+set(AKONADI_VERSION "5.19.40")
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX AKONADINOTES
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h"
