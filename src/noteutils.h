@@ -21,7 +21,7 @@ template<typename T> class QSharedPointer;
 namespace KMime
 {
 class Message;
-typedef QSharedPointer<Message> MessagePtr;
+using MessagePtr = QSharedPointer<Message>;
 }
 namespace Akonadi
 {

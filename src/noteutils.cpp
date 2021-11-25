@@ -160,9 +160,7 @@ QString Attachment::label() const
 class NoteMessageWrapperPrivate
 {
 public:
-    NoteMessageWrapperPrivate()
-    {
-    }
+    NoteMessageWrapperPrivate() = default;
 
     NoteMessageWrapperPrivate(const KMime::MessagePtr &msg)
     {
@@ -258,14 +256,14 @@ QDomDocument loadDocument(KMime::Content *part)
     if (!ok) {
         qCWarning(AKONADINOTES_LOG) << part->body();
         qWarning("Error loading document: %s, line %d, column %d", qPrintable(errorMsg), errorLine, errorColumn);
-        return QDomDocument();
+        return {};
     }
     return document;
 }
 
 KMime::Content *NoteMessageWrapperPrivate::createCustomPart() const
 {
-    KMime::Content *content = new KMime::Content();
+    auto content = new KMime::Content();
     auto header = new KMime::Headers::Generic(X_NOTES_CONTENTTYPE_HEADER);
     header->fromUnicodeString(CONTENT_TYPE_CUSTOM, ENCODING);
     content->appendHeader(header);
@@ -309,7 +307,7 @@ void NoteMessageWrapperPrivate::parseCustomPart(KMime::Content *part)
 
 KMime::Content *NoteMessageWrapperPrivate::createAttachmentPart(const Attachment &a) const
 {
-    KMime::Content *content = new KMime::Content();
+    auto content = new KMime::Content();
     auto header = new KMime::Headers::Generic(X_NOTES_CONTENTTYPE_HEADER);
     header->fromUnicodeString(CONTENT_TYPE_ATTACHMENT, ENCODING);
     content->appendHeader(header);
