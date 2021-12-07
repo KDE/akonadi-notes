@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: none
+# SPDX-License-Identifier: BSD-3-Clause
 include(ECMMarkAsTest)
 find_package(Qt5Test ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
 

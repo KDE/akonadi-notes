@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: none
+# SPDX-License-Identifier: BSD-3-Clause
 add_library(KF5AkonadiNotes)
 add_library(KF5::KF5AkonadiNotes ALIAS KF5AkonadiNotes)
 
