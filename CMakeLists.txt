@@ -46,7 +46,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX AKONADINOTES
     )
 
 ########### Find packages ###########
-find_package(Qt5Xml ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
+find_package(Qt${QT_MAJOR_VERSION}Xml ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
 
 find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Mime ${KMIMELIB_VERSION} CONFIG REQUIRED)
@@ -83,7 +83,7 @@ install(EXPORT KF5AkonadiNotesTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" F
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF} COMPONENT Devel
     )
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
