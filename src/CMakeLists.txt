@@ -15,7 +15,7 @@ generate_export_header(KF5AkonadiNotes BASE_NAME akonadi-notes)
 
 kde_target_enable_exceptions(KF5AkonadiNotes PUBLIC)
 
-target_include_directories(KF5AkonadiNotes INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/Akonadi/Notes;${KDE_INSTALL_INCLUDEDIR_KF}/akonadi/notes>")
+target_include_directories(KF5AkonadiNotes INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiNotes>")
 target_include_directories(KF5AkonadiNotes PUBLIC "$<BUILD_INTERFACE:${Akonadi-Notes_SOURCE_DIR}/src;${Akonadi-Notes_BINARY_DIR}/src;>")
 
 target_link_libraries(KF5AkonadiNotes
@@ -42,12 +42,12 @@ ecm_generate_headers(AkonadiNotes_CamelCase_HEADERS
 
     NoteUtils
     REQUIRED_HEADERS AkonadiNotes_HEADERS
-    PREFIX Akonadi/Notes
+    PREFIX Akonadi
     )
 
 install(FILES
     ${AkonadiNotes_CamelCase_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Akonadi/Notes
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiNotes/Akonadi
     COMPONENT Devel
     )
 
@@ -55,7 +55,7 @@ install(FILES
     ${AkonadiNotes_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_export.h
     ${AkonadiNotes_CamelCase_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/akonadi/notes
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiNotes/akonadi
     COMPONENT Devel
     )
 

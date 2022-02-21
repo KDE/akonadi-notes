@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: none
 # SPDX-License-Identifier: BSD-3-Clause
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
-set(PIM_VERSION "5.19.40")
+set(PIM_VERSION "5.19.41")
 
 project(Akonadi-Notes VERSION ${PIM_VERSION})
 
@@ -84,7 +84,7 @@ install(EXPORT KF5AkonadiNotesTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" F
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF} COMPONENT Devel
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiNotes COMPONENT Devel
     )
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
