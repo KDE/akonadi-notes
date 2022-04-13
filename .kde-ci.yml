@@ -7,3 +7,6 @@ Dependencies:
     'frameworks/extra-cmake-modules': '@latest'
     'pim/akonadi' : '@same'
     'pim/kmime' : '@same'
+
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
