@@ -22,7 +22,7 @@ target_link_libraries(KF5AkonadiNotes
     PUBLIC
     KF5::Mime
     PRIVATE
-    Qt${QT_MAJOR_VERSION}::Xml
+    Qt::Xml
     KF5::I18n
     )
 
