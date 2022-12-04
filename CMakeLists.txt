@@ -58,7 +58,7 @@ find_package(KF5Mime ${KMIMELIB_VERSION} CONFIG REQUIRED)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadinotes5\")
 
-ecm_set_disabled_deprecation_versions(QT 5.15.2  KF 5.100.0)
+ecm_set_disabled_deprecation_versions(QT 5.15.2  KF 5.101.0)
 
 
 
