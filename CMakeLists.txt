@@ -6,9 +6,9 @@ set(PIM_VERSION "5.22.40")
 project(Akonadi-Notes VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_MIN_VERSION "5.102.0")
+set(KF_MIN_VERSION "5.102.0")
 
-find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -52,7 +52,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX AKONADINOTES
 ########### Find packages ###########
 find_package(Qt${QT_MAJOR_VERSION}Xml ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
 
-find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Mime ${KMIMELIB_VERSION} CONFIG REQUIRED)
 ########### Targets ###########
 
