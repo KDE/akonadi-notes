@@ -49,18 +49,24 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX AKONADINOTES
     SOVERSION 5
     )
 
+if (QT_MAJOR_VERSION STREQUAL "6")
+    set(QT_MIN_VERSION "6.4.0")
+    set(KF_MIN_VERSION "5.240.0")
+    set(KF_MAJOR_VERSION "6")
+else()
+    set(KF_MAJOR_VERSION "5")
+endif()
+
 ########### Find packages ###########
 find_package(Qt${QT_MAJOR_VERSION}Xml ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
 
-find_package(KF5I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF${KF_MAJOR_VERSION}I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Mime ${KMIMELIB_VERSION} CONFIG REQUIRED)
 ########### Targets ###########
 
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadinotes5\")
 
 ecm_set_disabled_deprecation_versions(QT 5.15.2  KF 5.102.0)
-
-
 
 
 add_subdirectory(src)

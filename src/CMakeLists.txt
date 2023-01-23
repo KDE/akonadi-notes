@@ -23,7 +23,7 @@ target_link_libraries(KF5AkonadiNotes
     KF5::Mime
     PRIVATE
     Qt::Xml
-    KF5::I18n
+    KF${KF_MAJOR_VERSION}::I18n
     )
 
 set_target_properties(KF5AkonadiNotes PROPERTIES
