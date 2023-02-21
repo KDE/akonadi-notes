@@ -20,7 +20,7 @@ target_include_directories(KF5AkonadiNotes PUBLIC "$<BUILD_INTERFACE:${Akonadi-N
 
 target_link_libraries(KF5AkonadiNotes
     PUBLIC
-    KF5::Mime
+    KPim${KF_MAJOR_VERSION}::Mime
     PRIVATE
     Qt::Xml
     KF${KF_MAJOR_VERSION}::I18n
