@@ -43,11 +43,6 @@ set(AKONADI_NOTES_VERSION ${PIM_VERSION})
 set(KMIMELIB_VERSION "5.22.41")
 set(AKONADI_VERSION "5.22.40")
 
-ecm_setup_version(PROJECT VARIABLE_PREFIX AKONADINOTES
-    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h"
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfigVersion.cmake"
-    SOVERSION 5
-    )
 
 if (QT_MAJOR_VERSION STREQUAL "6")
     set(QT_MIN_VERSION "6.4.0")
@@ -56,6 +51,12 @@ if (QT_MAJOR_VERSION STREQUAL "6")
 else()
     set(KF_MAJOR_VERSION "5")
 endif()
+
+ecm_setup_version(PROJECT VARIABLE_PREFIX AKONADINOTES
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiNotesConfigVersion.cmake"
+    SOVERSION 5
+    )
 
 ########### Find packages ###########
 find_package(Qt${QT_MAJOR_VERSION}Xml ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
@@ -74,26 +75,26 @@ if (BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 ########### CMake Config Files ###########
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiNotes")
-
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim${KF_MAJOR_VERSION}AkonadiNotes")
+set(AKONADINOTES_KF5_COMPAT FALSE)
 configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/KF5AkonadiNotesConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfig.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/KPimAkonadiNotesConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiNotesConfig.cmake"
     INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
     )
 
 install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiNotesConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiNotesConfigVersion.cmake"
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
     COMPONENT Devel
     )
 
-install(EXPORT KF5AkonadiNotesTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5AkonadiNotesTargets.cmake NAMESPACE KF5::)
+install(EXPORT KPim${KF_MAJOR_VERSION}AkonadiNotesTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim${KF_MAJOR_VERSION}AkonadiNotesTargets.cmake NAMESPACE KPim${KF_MAJOR_VERSION}::)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiNotes COMPONENT Devel
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/AkonadiNotes COMPONENT Devel
     )
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
@@ -101,12 +102,47 @@ ki18n_install(po)
 
 if (BUILD_QCH)
     ecm_install_qch_export(
-        TARGETS KF5AkonadiNotes_QCH
-        FILE KF5AkonadiNotesQchTargets.cmake
+        TARGETS KPim${KF_MAJOR_VERSION}AkonadiNotes_QCH
+        FILE KPim${KF_MAJOR_VERSION}AkonadiNotesQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KF5AkonadiNotesQchTargets.cmake\")")
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim${KF_MAJOR_VERSION}AkonadiNotesQchTargets.cmake\")")
+endif()
+##
+# TODO: Backwards compatiblity. Remove in next major version
+##
+set(CMAKECONFIG_INSTALL_DIR_KF5 "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiNotes")
+set(AKONADINOTES_KF5_COMPAT TRUE)
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/KPimAkonadiNotesConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfig.cmake"
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR_KF5}
+)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiNotesConfig.cmake"
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR_KF5}"
+    COMPONENT Devel
+)
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiNotesConfigVersion.cmake"
+    RENAME "KF5AkonadiNotesConfigVersion.cmake"
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR_KF5}"
+    COMPONENT Devel
+)
+install(EXPORT KPim${KF_MAJOR_VERSION}AkonadiNotesTargets
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR_KF5}"
+    FILE KPim${KF_MAJOR_VERSION}AkonadiNotesTargets.cmake
+    NAMESPACE KF5::
+)
+
+add_definitions(-DTRANSLATION_DOMAIN=\"libktnef5\")
+option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
+
+set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
+if (USE_UNITY_CMAKE_SUPPORT)
+    set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
 endif()
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
