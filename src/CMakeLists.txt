@@ -61,7 +61,7 @@ install(FILES
     )
 
 ecm_generate_pri_file(BASE_NAME AkonadiNotes
-    LIB_NAME KF5AkonadiNotes
+    LIB_NAME KF${KF_MAJOR_VERSION}AkonadiNotes
     DEPS "KMime" FILENAME_VAR PRI_FILENAME
     )
 
