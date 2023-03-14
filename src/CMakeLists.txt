@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: BSD-3-Clause
 add_library(KPim${KF_MAJOR_VERSION}AkonadiNotes)
 add_library(KPim${KF_MAJOR_VERSION}::AkonadiNotes ALIAS KPim${KF_MAJOR_VERSION}AkonadiNotes)
-add_library(KF5::AkonadiNotes ALIAS KPim${KF_MAJOR_VERSION}AkonadiNotes)
 
 target_sources(KPim${KF_MAJOR_VERSION}AkonadiNotes PRIVATE
     noteutils.cpp
