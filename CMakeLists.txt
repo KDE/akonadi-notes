@@ -144,7 +144,6 @@ install(EXPORT KPim${KF_MAJOR_VERSION}AkonadiNotesTargets
 endif()
 endif()
 
-add_definitions(-DTRANSLATION_DOMAIN=\"libktnef5\")
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 
 set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
