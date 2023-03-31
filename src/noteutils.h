@@ -66,12 +66,12 @@ public:
     /**
      * Returns the url for url-only attachments
      */
-    QUrl url() const;
+    Q_REQUIRED_RESULT QUrl url() const;
 
     /**
      * Returns the date for inline attachments
      */
-    QByteArray data() const;
+    Q_REQUIRED_RESULT QByteArray data() const;
 
     /**
      * Sets the unique identifier of the attachment
@@ -87,7 +87,7 @@ public:
      *
      * @since 5.15
      */
-    QString contentID() const;
+    Q_REQUIRED_RESULT QString contentID() const;
 
     /**
      * Set this to true if inline data provided via ctor
@@ -102,12 +102,12 @@ public:
      *
      * @since 5.15
      */
-    bool dataBase64Encoded() const;
+    Q_REQUIRED_RESULT bool dataBase64Encoded() const;
 
     /**
      * Returns the mimetype
      */
-    QString mimetype() const;
+    Q_REQUIRED_RESULT QString mimetype() const;
 
     /**
      * Sets the label to be presented to the user
@@ -117,7 +117,7 @@ public:
     /**
      * Returns the label of the attachment
      */
-    QString label() const;
+    Q_REQUIRED_RESULT QString label() const;
 
 private:
     //@cond PRIVATE
@@ -182,7 +182,7 @@ public:
     /**
      * Returns the uid of the note
      */
-    QString uid() const;
+    Q_REQUIRED_RESULT QString uid() const;
 
     enum Classification { Public, Private, Confidential };
 
@@ -194,7 +194,7 @@ public:
     /**
      * Returns the classification of the note
      */
-    Classification classification() const;
+    Q_REQUIRED_RESULT Classification classification() const;
 
     /**
      * Set the title of the note
@@ -204,7 +204,7 @@ public:
     /**
      * Returns the title of the note
      */
-    QString title() const;
+    Q_REQUIRED_RESULT QString title() const;
 
     /**
      * Set the text of the note
@@ -216,17 +216,17 @@ public:
     /**
      * Returns the text of the note
      */
-    QString text() const;
+    Q_REQUIRED_RESULT QString text() const;
 
     /**
      * @return Qt::PlainText or Qt::RichText
      */
-    Qt::TextFormat textFormat() const;
+    Q_REQUIRED_RESULT Qt::TextFormat textFormat() const;
 
     /**
      * @return plaintext version of the text (if richtext)
      */
-    QString toPlainText() const;
+    Q_REQUIRED_RESULT QString toPlainText() const;
 
     /**
      * Set the creation date of the note (stored in the mime header)
@@ -236,7 +236,7 @@ public:
     /**
      * Returns the creation date of the note
      */
-    QDateTime creationDate() const;
+    Q_REQUIRED_RESULT QDateTime creationDate() const;
 
     /**
      * Set the lastModified-date of the note
@@ -246,7 +246,7 @@ public:
     /**
      * Returns the lastModified-date of the note
      */
-    QDateTime lastModifiedDate() const;
+    Q_REQUIRED_RESULT QDateTime lastModifiedDate() const;
 
     /**
      * Set the origin (creator) of the note (stored in the mime header)
@@ -258,18 +258,18 @@ public:
     /**
      * Returns the origin (creator) of the note
      */
-    QString from() const;
+    Q_REQUIRED_RESULT QString from() const;
 
     /**
      * Returns a reference to the list of attachments of the note
      */
-    QVector<Attachment> &attachments();
+    Q_REQUIRED_RESULT QVector<Attachment> &attachments();
 
     /**
      * Returns a reference to the custom-value map
      * @return key-value map containing all custom values
      */
-    QMap<QString, QString> &custom();
+    Q_REQUIRED_RESULT QMap<QString, QString> &custom();
 
     /**
      * Assemble a KMime message with the given values
