@@ -10,8 +10,8 @@ deprecated: false
 release: false
 libraries:
  - qmake: AkonadiNotes
-   cmake: "KF5::AkonadiNotes"
-cmakename: KF5AkonadiNotes
+   cmake: "KPim6::AkonadiNotes"
+cmakename: KPim6AkonadiNotes
 
 public_lib: true
 group: kdepim
