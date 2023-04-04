@@ -263,7 +263,7 @@ public:
     /**
      * Returns a reference to the list of attachments of the note
      */
-    Q_REQUIRED_RESULT QVector<Attachment> &attachments();
+    Q_REQUIRED_RESULT QList<Attachment> &attachments();
 
     /**
      * Returns a reference to the custom-value map

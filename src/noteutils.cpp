@@ -182,7 +182,7 @@ public:
     QDateTime creationDate;
     QDateTime lastModifiedDate;
     QMap<QString, QString> custom;
-    QVector<Attachment> attachments;
+    QList<Attachment> attachments;
     NoteMessageWrapper::Classification classification = NoteMessageWrapper::Public;
     Qt::TextFormat textFormat = Qt::PlainText;
 };
@@ -548,7 +548,7 @@ QString NoteMessageWrapper::toPlainText() const
     return body.remove(QRegularExpression(QStringLiteral("<[^>]*>"))).trimmed().toHtmlEscaped();
 }
 
-QVector<Attachment> &NoteMessageWrapper::attachments()
+QList<Attachment> &NoteMessageWrapper::attachments()
 {
     Q_D(NoteMessageWrapper);
     return d->attachments;
