@@ -54,7 +54,7 @@ find_package(KPim6Mime ${KMIMELIB_VERSION} CONFIG REQUIRED)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadinotes5\")
 
-ecm_set_disabled_deprecation_versions(QT 6.4  KF 5.105.0)
+ecm_set_disabled_deprecation_versions(QT 6.4  KF 5.240.0)
 
 
 add_subdirectory(src)
