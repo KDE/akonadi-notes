@@ -52,31 +52,24 @@ find_package(KF6I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KPim6Mime ${KMIMELIB_VERSION} CONFIG REQUIRED)
 ########### Targets ###########
 
+option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
+
+set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
+if (USE_UNITY_CMAKE_SUPPORT)
+    set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
+endif()
+
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadinotes5\")
 
 ecm_set_disabled_deprecation_versions(QT 6.5  KF 5.240.0)
 
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6AkonadiNotes")
 
 add_subdirectory(src)
 if (BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 ########### CMake Config Files ###########
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6AkonadiNotes")
-configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/KPimAkonadiNotesConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiNotesConfig.cmake"
-    INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-    )
-
-install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiNotesConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiNotesConfigVersion.cmake"
-    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-    COMPONENT Devel
-    )
-
-install(EXPORT KPim6AkonadiNotesTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6AkonadiNotesTargets.cmake NAMESPACE KPim6::)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h
@@ -96,11 +89,21 @@ if (BUILD_QCH)
     set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6AkonadiNotesQchTargets.cmake\")")
 endif()
 
-option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/KPimAkonadiNotesConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiNotesConfig.cmake"
+    INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+    )
 
-set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
-if (USE_UNITY_CMAKE_SUPPORT)
-    set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
-endif()
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiNotesConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiNotesConfigVersion.cmake"
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    COMPONENT Devel
+    )
+
+install(EXPORT KPim6AkonadiNotesTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6AkonadiNotesTargets.cmake NAMESPACE KPim6::)
+
+
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
