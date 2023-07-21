@@ -7,7 +7,7 @@ project(Akonadi-Notes VERSION ${PIM_VERSION})
 
 # ECM setup
 set(KF_MIN_VERSION "5.240.0")
-set(QT_MIN_VERSION "6.4.0")
+set(QT_REQUIRED_VERSION "6.4.0")
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
@@ -33,7 +33,6 @@ include(ECMAddQch)
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
-set(QT_REQUIRED_VERSION "6.4.0")
 set(AKONADI_NOTES_VERSION ${PIM_VERSION})
 
 set(KMIMELIB_VERSION "5.240.40")
