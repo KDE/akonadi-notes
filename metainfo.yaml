@@ -12,8 +12,7 @@ portingAid: false
 deprecated: false
 release: false
 libraries:
- - qmake: AkonadiNotes
-   cmake: "KPim6::AkonadiNotes"
+ - cmake: "KPim6::AkonadiNotes"
 cmakename: KPim6AkonadiNotes
 
 public_lib: true
