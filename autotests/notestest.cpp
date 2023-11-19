@@ -12,6 +12,7 @@
 
 #include <KMime/KMimeMessage>
 #include <QDateTime>
+#include <QTimeZone>
 
 using namespace Akonadi::NoteUtils;
 class NotesTest : public QObject
@@ -27,8 +28,8 @@ private Q_SLOTS:
         note.setUid(QStringLiteral("uid"));
         note.setClassification(NoteMessageWrapper::Private);
         note.setFrom(QStringLiteral("from@kde.org"));
-        note.setCreationDate(QDateTime(QDate(2012, 3, 3), QTime(3, 3, 3), Qt::UTC));
-        note.setLastModifiedDate(QDateTime(QDate(2012, 3, 3), QTime(4, 4, 4), Qt::UTC));
+        note.setCreationDate(QDateTime(QDate(2012, 3, 3), QTime(3, 3, 3), QTimeZone::utc()));
+        note.setLastModifiedDate(QDateTime(QDate(2012, 3, 3), QTime(4, 4, 4), QTimeZone::utc()));
         Attachment a("testfile2", QStringLiteral("mimetype/mime3"));
         a.setLabel(QStringLiteral("label"));
         note.attachments() << Attachment(QUrl(QStringLiteral("file://url/to/file")), QStringLiteral("mimetype/mime"))
