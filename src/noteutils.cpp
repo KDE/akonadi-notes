@@ -248,14 +248,11 @@ QDomDocument createXMLDocument()
 
 QDomDocument loadDocument(KMime::Content *part)
 {
-    QString errorMsg;
-    int errorLine;
-    int errorColumn;
     QDomDocument document;
-    bool ok = document.setContent(part->body(), &errorMsg, &errorLine, &errorColumn);
-    if (!ok) {
+    const QDomDocument::ParseResult parseResult = document.setContent(part->body());
+    if (!parseResult) {
         qCWarning(AKONADINOTES_LOG) << part->body();
-        qWarning("Error loading document: %s, line %d, column %d", qPrintable(errorMsg), errorLine, errorColumn);
+        qWarning("Error loading document: %s, line %lld, column %lld", qPrintable(parseResult.errorMessage), parseResult.errorLine, parseResult.errorColumn);
         return {};
     }
     return document;
