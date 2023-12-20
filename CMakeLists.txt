@@ -57,7 +57,7 @@ if (USE_UNITY_CMAKE_SUPPORT)
     set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
 endif()
 
-add_definitions(-DTRANSLATION_DOMAIN=\"akonadinotes5\")
+add_definitions(-DTRANSLATION_DOMAIN=\"akonadinotes6\")
 
 add_definitions(-DQT_NO_CONTEXTLESS_CONNECT)
 ecm_set_disabled_deprecation_versions(QT 6.6.0 KF 5.246.0)
