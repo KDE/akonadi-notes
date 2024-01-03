@@ -1,4 +1,4 @@
-# Translation of akonadinotes5 to Norwegian Nynorsk
+# Translation of akonadinotes6 to Norwegian Nynorsk
 #
 # Karl Ove Hufthammer <karl@huftis.org>, 2020.
 msgid ""

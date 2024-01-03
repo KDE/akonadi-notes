@@ -1,4 +1,4 @@
-# Translation of akonadinotes5 to Norwegian Bokmål
+# Translation of akonadinotes6 to Norwegian Bokmål
 #
 # Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2011.
 msgid ""
