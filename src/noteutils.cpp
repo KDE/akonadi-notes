@@ -425,11 +425,11 @@ KMime::MessagePtr NoteMessageWrapper::message() const
     msg->appendHeader(header);
 
     for (const Attachment &a : std::as_const(d->attachments)) {
-        msg->addContent(d->createAttachmentPart(a));
+        msg->appendContent(d->createAttachmentPart(a));
     }
 
     if (!d->custom.isEmpty()) {
-        msg->addContent(d->createCustomPart());
+        msg->appendContent(d->createCustomPart());
     }
 
     msg->mainBodyPart()->contentType(true)->setCharset(ENCODING);
