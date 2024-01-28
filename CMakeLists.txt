@@ -27,6 +27,7 @@ kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
+include(ECMFeatureSummary)
 include(ECMAddQch)
 
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
@@ -105,4 +106,4 @@ install(EXPORT KPim6AkonadiNotesTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
 
 
 
-feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
