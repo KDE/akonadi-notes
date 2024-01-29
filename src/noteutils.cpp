@@ -286,7 +286,7 @@ void NoteMessageWrapperPrivate::parseCustomPart(KMime::Content *part)
         return;
     }
     QDomElement top = document.documentElement();
-    if (top.tagName() != QLatin1String("custom")) {
+    if (top.tagName() != QLatin1StringView("custom")) {
         qWarning("XML error: Top tag was %s instead of the expected custom", top.tagName().toLatin1().data());
         return;
     }
@@ -340,12 +340,12 @@ void NoteMessageWrapperPrivate::parseAttachmentPart(KMime::Content *part)
         label = labelHeader->asUnicodeString();
     }
     if (KMime::Headers::Base *header = part->headerByType(X_NOTES_URL_HEADER)) {
-        Attachment attachment(QUrl(header->asUnicodeString()), QLatin1String(part->contentType()->mimeType()));
+        Attachment attachment(QUrl(header->asUnicodeString()), QLatin1StringView(part->contentType()->mimeType()));
         attachment.setLabel(label);
         attachment.setContentID(QString::fromLatin1(part->contentID()->identifier()));
         attachments.append(attachment);
     } else {
-        Attachment attachment(part->decodedContent(), QLatin1String(part->contentType()->mimeType()));
+        Attachment attachment(part->decodedContent(), QLatin1StringView(part->contentType()->mimeType()));
         attachment.setLabel(label);
         attachment.setContentID(QString::fromLatin1(part->contentID()->identifier()));
         attachments.append(attachment);
