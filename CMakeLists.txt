@@ -34,8 +34,8 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 
 set(AKONADI_NOTES_VERSION ${PIM_VERSION})
 
-set(KMIMELIB_VERSION "6.0.0")
-set(AKONADI_VERSION "6.0.0")
+set(KMIMELIB_VERSION "6.0.1")
+set(AKONADI_VERSION "6.0.1")
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX AKONADINOTES
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi-notes_version.h"
