@@ -8,7 +8,7 @@
 
 #include "akonadi_notes_debug.h"
 #include <KLocalizedString>
-#include <KMime/KMimeMessage>
+#include <KMime/Message>
 #include <QDateTime>
 
 #include <QRegularExpression>

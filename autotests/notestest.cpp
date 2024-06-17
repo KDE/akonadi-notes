@@ -10,7 +10,7 @@
 #include <QHash>
 #include <QTest>
 
-#include <KMime/KMimeMessage>
+#include <KMime/Message>
 #include <QDateTime>
 #include <QTimeZone>
 
