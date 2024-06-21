@@ -59,7 +59,7 @@ install(FILES
     COMPONENT Devel
     )
 
-if (BUILD_QCH)
+if(BUILD_QCH)
     ecm_add_qch(
         KPim6AkonadiNotes_QCH
         NAME KPim6AkonadiNotes
