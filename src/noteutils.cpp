@@ -313,7 +313,11 @@ KMime::Content *NoteMessageWrapperPrivate::createAttachmentPart(const Attachment
         header->fromUnicodeString(a.url().toString(), ENCODING);
         content->appendHeader(header);
     } else {
-        content->setBody(a.data());
+        if (a.dataBase64Encoded()) {
+            content->setEncodedBody(a.data());
+        } else {
+            content->setBody(a.data());
+        }
     }
     content->contentType()->setMimeType(a.mimetype().toLatin1());
     if (!a.label().isEmpty()) {
@@ -322,9 +326,6 @@ KMime::Content *NoteMessageWrapperPrivate::createAttachmentPart(const Attachment
         content->appendHeader(header);
     }
     content->contentTransferEncoding()->setEncoding(KMime::Headers::CEbase64);
-    if (a.dataBase64Encoded()) {
-        content->contentTransferEncoding()->setDecoded(false);
-    }
     content->contentDisposition()->setDisposition(KMime::Headers::CDattachment);
     content->contentDisposition()->setFilename(QStringLiteral("attachment"));
     if (!a.contentID().isEmpty()) {
