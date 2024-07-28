@@ -262,7 +262,7 @@ KMime::Content *NoteMessageWrapperPrivate::createCustomPart() const
 {
     auto content = new KMime::Content();
     auto header = new KMime::Headers::Generic(X_NOTES_CONTENTTYPE_HEADER);
-    header->fromUnicodeString(CONTENT_TYPE_CUSTOM, ENCODING);
+    header->fromUnicodeString(CONTENT_TYPE_CUSTOM);
     content->appendHeader(header);
     QDomDocument document = createXMLDocument();
     QDomElement element = document.createElement(QStringLiteral("custom"));
@@ -306,11 +306,11 @@ KMime::Content *NoteMessageWrapperPrivate::createAttachmentPart(const Attachment
 {
     auto content = new KMime::Content();
     auto header = new KMime::Headers::Generic(X_NOTES_CONTENTTYPE_HEADER);
-    header->fromUnicodeString(CONTENT_TYPE_ATTACHMENT, ENCODING);
+    header->fromUnicodeString(CONTENT_TYPE_ATTACHMENT);
     content->appendHeader(header);
     if (a.url().isValid()) {
         header = new KMime::Headers::Generic(X_NOTES_URL_HEADER);
-        header->fromUnicodeString(a.url().toString(), ENCODING);
+        header->fromUnicodeString(a.url().toString());
         content->appendHeader(header);
     } else {
         if (a.dataBase64Encoded()) {
@@ -322,7 +322,7 @@ KMime::Content *NoteMessageWrapperPrivate::createAttachmentPart(const Attachment
     content->contentType()->setMimeType(a.mimetype().toLatin1());
     if (!a.label().isEmpty()) {
         header = new KMime::Headers::Generic(X_NOTES_LABEL_HEADER);
-        header->fromUnicodeString(a.label(), ENCODING);
+        header->fromUnicodeString(a.label());
         content->appendHeader(header);
     }
     content->contentTransferEncoding()->setEncoding(KMime::Headers::CEbase64);
@@ -397,16 +397,16 @@ KMime::MessagePtr NoteMessageWrapper::message() const
         uid = QUuid::createUuid().toString().mid(1, 36);
     }
 
-    msg->subject(true)->fromUnicodeString(title, ENCODING);
+    msg->subject(true)->fromUnicodeString(title);
     msg->date(true)->setDateTime(creationDate);
-    msg->from(true)->fromUnicodeString(d->from, ENCODING);
+    msg->from(true)->fromUnicodeString(d->from);
     const QString formatDate = QLocale::c().toString(lastModifiedDate, QStringLiteral("ddd, ")) + lastModifiedDate.toString(Qt::RFC2822Date);
 
     auto header = new KMime::Headers::Generic(X_NOTES_LASTMODIFIED_HEADER);
-    header->fromUnicodeString(formatDate, ENCODING);
+    header->fromUnicodeString(formatDate);
     msg->appendHeader(header);
     header = new KMime::Headers::Generic(X_NOTES_UID_HEADER);
-    header->fromUnicodeString(uid, ENCODING);
+    header->fromUnicodeString(uid);
     msg->appendHeader(header);
 
     QString classification = CLASSIFICATION_PUBLIC;
@@ -422,7 +422,7 @@ KMime::MessagePtr NoteMessageWrapper::message() const
         break;
     }
     header = new KMime::Headers::Generic(X_NOTES_CLASSIFICATION_HEADER);
-    header->fromUnicodeString(classification, ENCODING);
+    header->fromUnicodeString(classification);
     msg->appendHeader(header);
 
     for (const Attachment &a : std::as_const(d->attachments)) {
