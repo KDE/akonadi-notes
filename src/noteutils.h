@@ -16,7 +16,8 @@
 class QDateTime;
 class QString;
 
-template<typename T> class QSharedPointer;
+template<typename T>
+class QSharedPointer;
 
 namespace KMime
 {
@@ -184,7 +185,11 @@ public:
      */
     [[nodiscard]] QString uid() const;
 
-    enum Classification { Public, Private, Confidential };
+    enum Classification {
+        Public,
+        Private,
+        Confidential
+    };
 
     /**
      * Set the classification of the note
